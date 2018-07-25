@@ -1,5 +1,5 @@
 /*
- * List of card objects
+ * List of card objects.
  */
 const cards = [
   { id: 1, image: "three_musketeers.png" },
@@ -92,12 +92,17 @@ const cards = [
 ];
 
 /*
- * Deck size object
+ * Deck size object.
  */
 const deckSize = { small: 16, large: 36 };
 
 /*
- * Exception object
+ * List of selected cards.
+ */
+const selectedCards = [];
+
+/*
+ * Exception object.
  */
 function Exception(message) {
   this.message = message;
@@ -107,7 +112,7 @@ function Exception(message) {
  * Selects the number of cards requested at random.
  */
 function selectRandomCards(numberOfCards) {
-  const selectedCards = [];
+  const randomCards = [];
   const maxCardsIndex = cards.length - 1;
   const small = deckSize.small / 2;
   const large = deckSize.large / 2;
@@ -117,15 +122,15 @@ function selectRandomCards(numberOfCards) {
     throw Exception(`Number of cards needs to be ${small} or ${large}.`);
   }
 
-  while (selectedCards.length != numberOfCards) {
+  while (randomCards.length != numberOfCards) {
     card = cards[Math.round(Math.random() * cards.length)];
 
-    if (!selectedCards.includes(card)) {
-      selectedCards.push(card);
+    if (!randomCards.includes(card)) {
+      randomCards.push(card);
     }
   }
 
-  return selectedCards;
+  return randomCards;
 }
 
 /*
@@ -134,7 +139,7 @@ function selectRandomCards(numberOfCards) {
 function shuffleCards(cards) {
   const deckCards = [...cards];
 
-  for (card of cards) {
+  for (const card of cards) {
     deckCards.splice(Math.round(Math.random() * deckCards.length), 0, card);
   }
 
@@ -142,28 +147,31 @@ function shuffleCards(cards) {
 }
 
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ * Display the cards.
  */
+function displayCards(numberOfCards) {
+  const domDeck = $(".deck");
+  const deckCards = shuffleCards(selectRandomCards(numberOfCards));
+  let domCard;
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
+  domDeck.find(".card").remove();
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+  for (const card of deckCards) {
+    domCard = $(`
+      <li class="card match">
+        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${card.image}" alt="">
+      </li>`);
+    domCard.on("click", card.id, selectedCard);
+    domDeck.append(domCard);
   }
-
-  return array;
 }
+
+/*
+ * Select a card.
+ */
+function selectedCard(event) {
+  console.log(event);
+} 
 
 /*
  * set up the event listener for a card. If a card is clicked:
