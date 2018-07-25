@@ -97,9 +97,9 @@ const cards = [
 const deckSize = { small: 16, large: 36 };
 
 /*
- * List of selected cards.
+ * List of turned cards.
  */
-const selectedCards = [];
+const turnedCards = [];
 
 /*
  * Exception object.
@@ -158,8 +158,10 @@ function displayCards(numberOfCards) {
 
   for (const card of deckCards) {
     domCard = $(`
-      <li class="card match">
-        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${card.image}" alt="">
+      <li class="card">
+        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${
+          card.image
+        }" alt="">
       </li>`);
     domCard.on("click", card.id, selectedCard);
     domDeck.append(domCard);
@@ -170,8 +172,74 @@ function displayCards(numberOfCards) {
  * Select a card.
  */
 function selectedCard(event) {
-  console.log(event);
-} 
+  const matchedCard = turnedCards.find(
+    card => card.status === "match" && card.id === event.data
+  );
+  const sameTurnCard = turnedCards.find(
+    card =>
+      card.status === "open" && card.id === event.data && card.dom === this
+  );
+
+  if (!matchedCard && !sameTurnCard) {
+    turnCard($(this));
+    compareCards(event.data, this);
+  }
+}
+
+/*
+ * Compare the previous and current turned cards.
+ */
+function compareCards(currentCardId, currentCardDom) {
+  const previousCard = turnedCards.find(card => card.status === "open");
+
+  if (previousCard) {
+    const currentCard = { id: currentCardId, dom: currentCardDom };
+
+    if (previousCard.id === currentCardId) {
+      matchCards(previousCard, currentCard);
+    } else {
+      untapCards(previousCard, currentCard);
+    }
+  } else {
+    turnedCards.push({
+      id: currentCardId,
+      status: "open",
+      dom: currentCardDom
+    });
+  }
+}
+
+/*
+ * Turn the card.
+ */
+function turnCard(domCard) {
+  domCard.toggleClass("open");
+}
+
+/*
+ * Untap the previous and current turned cards.
+ */
+function untapCards(previousCard, currentCard) {
+  turnedCards.pop();
+
+  setTimeout(function() {
+    $(previousCard.dom).toggleClass("open");
+    $(currentCard.dom).toggleClass("open");
+  }, 500);
+}
+
+/*
+ * Match previous and current turned cards.
+ */
+function matchCards(previousCard, currentCard) {
+  previousCard.status = "match";
+
+  setTimeout(function() {
+    $(previousCard.dom).toggleClass("open match");
+    $(currentCard.dom).toggleClass("open match");
+    previousCard.dom = null;
+  }, 500);
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:

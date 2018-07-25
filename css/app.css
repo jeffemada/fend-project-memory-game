@@ -71,20 +71,30 @@ img {
     padding: 10px;
 }
 
+.deck .card img {
+    display: none;
+}
+
 .deck .card.open {
     transform: rotateY(0);
     background: #02b3e4;
     cursor: default;
+    pointer-events:none;
 }
 
-.deck .card.show {
-    font-size: 33px;
+.deck .card.open img {
+    display: flex;
 }
 
 .deck .card.match {
     cursor: default;
     background: #02ccba;
     font-size: 33px;
+    pointer-events:none;
+}
+
+.deck .card.open, .card.match img {
+    display: flex;
 }
 
 /*
