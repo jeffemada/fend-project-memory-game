@@ -1,6 +1,4 @@
-/*
- * List of card objects.
- */
+// List of card objects.
 const cards = [
   { id: 1, image: "three_musketeers.png" },
   { id: 2, image: "chr_golem.png" },
@@ -91,15 +89,14 @@ const cards = [
   { id: 87, image: "mirror.png" }
 ];
 
-/*
- * Deck size object.
- */
+// Deck size object.
 const deckSize = { small: 16, large: 36 };
 
-/*
- * List of turned cards.
- */
-const turnedCards = [];
+// List of turned cards.
+let turnedCards = [];
+
+// Score panel object.
+const panelScore = { moveCounter: 0, startTime: 0, intervalManager: null };
 
 /*
  * Exception object.
@@ -150,21 +147,24 @@ function shuffleCards(cards) {
  * Display the cards.
  */
 function displayCards(numberOfCards) {
-  const domDeck = $(".deck");
-  const deckCards = shuffleCards(selectRandomCards(numberOfCards));
-  let domCard;
+  try {
+    const domDeck = $(".deck");
+    const deckCards = shuffleCards(selectRandomCards(numberOfCards));
+    let domCard;
 
-  domDeck.find(".card").remove();
+    domDeck.find(".card").remove();
 
-  for (const card of deckCards) {
-    domCard = $(`
+    for (const card of deckCards) {
+      domCard = $(`
       <li class="card">
-        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${
-          card.image
-        }" alt="">
+        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${card.image}" alt="">
       </li>`);
-    domCard.on("click", card.id, selectedCard);
-    domDeck.append(domCard);
+      domCard.on("click", card.id, selectedCard);
+      domDeck.append(domCard);
+    }
+  } catch (e) {
+    console.error(e.message);
+    //TODO show error popup to the user
   }
 }
 
@@ -172,13 +172,8 @@ function displayCards(numberOfCards) {
  * Select a card.
  */
 function selectedCard(event) {
-  const matchedCard = turnedCards.find(
-    card => card.status === "match" && card.id === event.data
-  );
-  const sameTurnCard = turnedCards.find(
-    card =>
-      card.status === "open" && card.id === event.data && card.dom === this
-  );
+  const matchedCard = turnedCards.find(card => card.status === "match" && card.id === event.data);
+  const sameTurnCard = turnedCards.find(card => card.status === "open" && card.id === event.data && card.dom === this);
 
   if (!matchedCard && !sameTurnCard) {
     turnCard($(this));
@@ -200,12 +195,11 @@ function compareCards(currentCardId, currentCardDom) {
     } else {
       untapCards(previousCard, currentCard);
     }
+
+    incrementMoveCounter();
+    updateStarRating();
   } else {
-    turnedCards.push({
-      id: currentCardId,
-      status: "open",
-      dom: currentCardDom
-    });
+    turnedCards.push({ id: currentCardId, status: "open", dom: currentCardDom });
   }
 }
 
@@ -240,6 +234,55 @@ function matchCards(previousCard, currentCard) {
     previousCard.dom = null;
   }, 500);
 }
+
+/*
+ * Increments the movement counter on each move.
+ */
+function incrementMoveCounter() {
+  $(".moves").text(++panelScore.moveCounter);
+}
+
+/*
+ * Update the elapsed time from the beginning of the game.
+ */
+function updateTime() {
+  $(".time").text(Math.trunc((performance.now() - panelScore.startTime) / 1000));
+}
+
+/*
+ * Update the star rating according the number of moves made.
+ */
+function updateStarRating() {
+  if (panelScore.moveCounter === 0) {
+    $(".star-disabled").toggleClass("star-enabled star-disabled");
+  } else if (panelScore.moveCounter === 13) {
+    $($(".stars").children()[0]).toggleClass("star-enabled star-disabled");
+  } else if (panelScore.moveCounter === 17) {
+    $($(".stars").children()[1]).toggleClass("star-enabled star-disabled");
+  }
+}
+
+/*
+ * Start a new game.
+ */
+function startGame() {
+  panelScore.moveCounter = -1;
+  turnedCards = [];
+
+  incrementMoveCounter();
+  updateStarRating();
+  displayCards(8);
+
+  // time control
+  panelScore.startTime = performance.now();
+  panelScore.intervalManager = setInterval(updateTime, 1000);
+
+  // TODO use in Congratulations Popup
+  //clearInterval(intervalManager);
+}
+
+// To start a game when the page is loaded
+$(startGame);
 
 /*
  * set up the event listener for a card. If a card is clicked:
