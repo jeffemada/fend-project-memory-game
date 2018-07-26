@@ -89,14 +89,17 @@ const cards = [
   { id: 87, image: "mirror.png" }
 ];
 
-// Deck size object.
-const deckSize = { small: 16, large: 36 };
+// Difficulty according the number of cards in the deck.
+const difficulty = { easy: 16, hard: 36 };
 
 // List of turned cards.
 let turnedCards = [];
 
-// Score panel object.
+// Object that represents score panel.
 const panelScore = { moveCounter: 0, startTime: 0, intervalManager: null };
+
+// Object that represents deck configuration.
+const deckConfig = {numberOfcards: difficulty.easy};
 
 /*
  * Exception object.
@@ -110,16 +113,15 @@ function Exception(message) {
  */
 function selectRandomCards(numberOfCards) {
   const randomCards = [];
-  const maxCardsIndex = cards.length - 1;
-  const small = deckSize.small / 2;
-  const large = deckSize.large / 2;
   let card;
 
-  if (!numberOfCards || (numberOfCards !== small && numberOfCards !== large)) {
-    throw Exception(`Number of cards needs to be ${small} or ${large}.`);
+  if ( !numberOfCards || (numberOfCards !== difficulty.easy && numberOfCards !== difficulty.hard)) {
+    throw Exception(`Number of cards needs to be ${difficulty.easy} or ${difficulty.hard}.`);
   }
 
-  while (randomCards.length != numberOfCards) {
+  let distinctCards = numberOfCards / 2;
+
+  while (randomCards.length !== distinctCards) {
     card = cards[Math.round(Math.random() * cards.length)];
 
     if (!randomCards.includes(card)) {
@@ -253,11 +255,13 @@ function updateTime() {
  * Update the star rating according the number of moves made.
  */
 function updateStarRating() {
+  const numCards = deckConfig.numberOfcards;
+
   if (panelScore.moveCounter === 0) {
     $(".star-disabled").toggleClass("star-enabled star-disabled");
-  } else if (panelScore.moveCounter === 13) {
+  } else if (panelScore.moveCounter === Math.trunc(numCards / 2 + numCards / 4)) {
     $($(".stars").children()[0]).toggleClass("star-enabled star-disabled");
-  } else if (panelScore.moveCounter === 17) {
+  } else if (panelScore.moveCounter === (numCards)) {
     $($(".stars").children()[1]).toggleClass("star-enabled star-disabled");
   }
 }
@@ -271,7 +275,7 @@ function startGame() {
 
   incrementMoveCounter();
   updateStarRating();
-  displayCards(8);
+  displayCards(deckConfig.numberOfcards); //TODO let user choose
 
   // time control
   panelScore.startTime = performance.now();
