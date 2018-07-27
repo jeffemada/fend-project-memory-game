@@ -21,44 +21,44 @@ body {
   font-family: "Coda", cursive;
 }
 
-.container {
+/* .container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 h1 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
 }
 
-img {
+/* img {
   width: 100%;
   height: auto;
-}
+} */
 
 /*
  * Styles for the deck of cards
  */
 
 .deck {
-  width: 660px;
-  min-height: 680px;
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-  padding: 32px;
+  /* width: 660px;
+  min-height: 680px; */
+  background: linear-gradient(160deg, #365ecc 0%, #cf3f3f 100%);
+  padding: 5px 0 5px 0;
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 3em;
+  justify-content: center;
+  /* align-items: center; */
+  /* margin: 0 0 3em; */
 }
 
 .deck .card {
-  height: 125px;
-  width: 125px;
+  height: 120px;
+  width: 100px;
   background: #2e3d49;
   font-size: 0;
   color: #ffffff;
@@ -68,7 +68,7 @@ img {
   justify-content: center;
   align-items: center;
   box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-  padding: 10px;
+  margin: 5px;
 }
 
 .deck .card img {
@@ -102,11 +102,11 @@ img {
  * Styles for the Score Panel
  */
 
-.score-panel {
+/* .score-panel {
   text-align: left;
   width: 345px;
   margin-bottom: 10px;
-}
+} */
 
 .score-panel .stars {
   margin: 0;
@@ -128,10 +128,10 @@ img {
   color: #fff4b8;
 }
 
-.score-panel .restart {
+/* .score-panel .restart {
   float: right;
   cursor: pointer;
-}
+} */
 
 .score-panel .moves,
 .time {
