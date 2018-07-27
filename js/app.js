@@ -96,7 +96,7 @@ const difficulty = { easy: 16, hard: 36 };
 let turnedCards = [];
 
 // Object that represents score panel.
-const panelScore = { moveCounter: 0, startTime: 0, intervalManager: null };
+const scorePanel = { moveCounter: 0, startTime: 0, intervalManager: null, playTime: 0 , starCounter: 0};
 
 // Object that represents deck configuration.
 const deckConfig = {numberOfcards: difficulty.easy};
@@ -181,6 +181,14 @@ function selectedCard(event) {
     turnCard($(this));
     compareCards(event.data, this);
   }
+
+  if (turnedCards.length === deckConfig.numberOfcards / 2) {
+    const hasFinished = turnedCards.every(card => card.status === "match");
+
+    if (hasFinished) {
+      endGame();
+    }
+  }
 }
 
 /*
@@ -241,14 +249,15 @@ function matchCards(previousCard, currentCard) {
  * Increments the movement counter on each move.
  */
 function incrementMoveCounter() {
-  $(".moves").text(++panelScore.moveCounter);
+  $(".moves").text(++scorePanel.moveCounter);
 }
 
 /*
  * Update the elapsed time from the beginning of the game.
  */
 function updateTime() {
-  $(".time").text(Math.trunc((performance.now() - panelScore.startTime) / 1000));
+  scorePanel.playTime = Math.trunc((performance.now() - scorePanel.startTime) / 1000);
+  $(".time").text(scorePanel.playTime);
 }
 
 /*
@@ -257,32 +266,51 @@ function updateTime() {
 function updateStarRating() {
   const numCards = deckConfig.numberOfcards;
 
-  if (panelScore.moveCounter === 0) {
+  if (scorePanel.moveCounter === 0) {
+    scorePanel.starCounter = 3;
     $(".star-disabled").toggleClass("star-enabled star-disabled");
-  } else if (panelScore.moveCounter === Math.trunc(numCards / 2 + numCards / 4)) {
+  } else if (scorePanel.moveCounter === Math.trunc(numCards / 2 + numCards / 4)) {
+    scorePanel.starCounter = 2;
     $($(".stars").children()[0]).toggleClass("star-enabled star-disabled");
-  } else if (panelScore.moveCounter === (numCards)) {
+  } else if (scorePanel.moveCounter === (numCards)) {
+    scorePanel.starCounter = 1;
     $($(".stars").children()[1]).toggleClass("star-enabled star-disabled");
   }
+}
+
+/*
+ * Show congratulation modal with user score.
+ */
+function showCongratulationModal() {
+  $("#congratulationScore").text(
+    `with ${scorePanel.moveCounter} moves and ${scorePanel.starCounter} star(s), in ${scorePanel.playTime} seconds.`
+  );
+  $("#congratulationModal").modal("show");
+}
+
+/*
+ * End the game and congratulate the user.
+ */
+function endGame() {
+  clearInterval(scorePanel.intervalManager);
+  showCongratulationModal();
 }
 
 /*
  * Start a new game.
  */
 function startGame() {
-  panelScore.moveCounter = -1;
+  scorePanel.moveCounter = -1;
   turnedCards = [];
 
+  $("#congratulationModal").modal("hide");
   incrementMoveCounter();
   updateStarRating();
   displayCards(deckConfig.numberOfcards); //TODO let user choose
 
   // time control
-  panelScore.startTime = performance.now();
-  panelScore.intervalManager = setInterval(updateTime, 1000);
-
-  // TODO use in Congratulations Popup
-  //clearInterval(intervalManager);
+  scorePanel.startTime = performance.now();
+  scorePanel.intervalManager = setInterval(updateTime, 1000);
 }
 
 // To start a game when the page is loaded
