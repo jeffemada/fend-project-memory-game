@@ -1,24 +1,32 @@
-html {
+/* html {
   box-sizing: border-box;
-}
+} */
 
-*,
+/* *,
 *::before,
 *::after {
   box-sizing: inherit;
-}
+} */
 
-html,
+/* html,
 body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-}
+} */
 
 body {
-  background: #ffffff url("../img/geometry2.png"); /* Background pattern from Subtle Patterns */
   font-family: "Coda", cursive;
+  color: #2e3d49;
+}
+
+a {
+  color: #2e3d49;
+}
+
+a:hover {
+  color: #2e3d49;
 }
 
 /* .container {
@@ -28,10 +36,10 @@ body {
   flex-direction: column;
 } */
 
-h1 {
+/* h1 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
-}
+} */
 
 /* img {
   width: 100%;
@@ -41,6 +49,14 @@ h1 {
 /*
  * Styles for the deck of cards
  */
+
+/*  .background {
+  background-image: url("../img/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  opacity: 0.9
+ } */
 
 .deck {
   /* width: 660px;
@@ -60,8 +76,8 @@ h1 {
   height: 120px;
   width: 100px;
   background: #2e3d49;
-  font-size: 0;
-  color: #ffffff;
+  /* font-size: 0;
+  color: #fff; */
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -89,7 +105,14 @@ h1 {
 .deck .card.match {
   cursor: default;
   background: #02ccba;
-  font-size: 33px;
+  /* font-size: 33px; */
+  pointer-events: none;
+}
+
+.deck .card.not-match {
+  cursor: default;
+  background: #cc0256;
+  /* font-size: 33px; */
   pointer-events: none;
 }
 
@@ -125,7 +148,7 @@ h1 {
 }
 
 .score-panel .stars .star-disabled {
-  color: #fff4b8;
+  color: #fdf5c5;
 }
 
 /* .score-panel .restart {
@@ -135,7 +158,15 @@ h1 {
 
 .score-panel .moves,
 .time {
-  width: 40px;
   text-align: right;
   display: inline-block;
+  width: 30px;
+}
+
+/* #congratulationModal {
+  color: #2e3d49;
+} */
+
+.footer-text {
+  font-size: 12px;
 }

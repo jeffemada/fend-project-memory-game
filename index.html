@@ -5,24 +5,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>CLash Royale Matching Game</title>
+    <title>Matching Game</title>
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="css/app.css">
 </head>
 
 <body class="container">
     <header>
-        <section class="row">
-            <div class="col-md-12">
-                <h1>CLash Royale Matching Game</h1>
+        <section class="row text-center">
+            <div class="col-12">
+                <h1>Matching Game</h1>
             </div>
         </section>
     </header>
     <main>
         <div class="row score-panel">
-            <div class="col-md-3">
+            <div class="col-3 text-left">
                 <ul class="stars">
                     <li class="star-enabled">
                         <i class="fa fa-star"></i>
@@ -35,20 +35,20 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-3 text-left">
                 <span class="moves">0</span> Moves
             </div>
-            <div class="col-md-3">
+            <div class="col-3 text-right">
                 <span class="time">0</span> Seconds
             </div>
-            <div class="col-md-3 restart">
+            <div class="col-3 text-right">
                 <a href="#" onclick="startGame()">
                     <i class="fa fa-repeat"></i>
                 </a>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-12">
                 <ul class="deck">
                 </ul>
             </div>
@@ -59,7 +59,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">                
                     <div class="modal-body">
-                        <img src="img/clashRoyaleCool.png" alt="Clash Royale cool emoji">
+                        <img class="img-fluid" src="img/clashRoyaleCool.png" alt="Clash Royale cool emoji">
                         <h5 class="modal-title">Congratulations! You Won!</h5>
                         <p id="congratulationScore"></p>
                     </div>
@@ -71,6 +71,19 @@
             </div>
         </div>
     </main>
+    <footer class="text-center footer-text">
+        <div class="row">
+            <div class="col-12">
+                <a href="https://twitter.com/jeffemada"><i class="fa fa-twitter"></i></a>
+                <a href="https://github.com/jeffemada"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>©Copyright 2018 by JeffeMada. All rights reversed.</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
