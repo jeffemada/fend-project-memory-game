@@ -225,12 +225,12 @@ function turnCard(domCard) {
  */
 function untapCards(previousCard, currentCard) {
   turnedCards.pop();
-  $(previousCard.dom).toggleClass("not-match");
-  $(currentCard.dom).toggleClass("not-match");
+  $(previousCard.dom).toggleClass("not-match shake-card");
+  $(currentCard.dom).toggleClass("not-match shake-card");
 
   setTimeout(function() {
-    $(previousCard.dom).toggleClass("open not-match");
-    $(currentCard.dom).toggleClass("open not-match");
+    $(previousCard.dom).toggleClass("open not-match shake-card");
+    $(currentCard.dom).toggleClass("open not-match shake-card");
   }, 500);
 }
 
@@ -239,10 +239,12 @@ function untapCards(previousCard, currentCard) {
  */
 function matchCards(previousCard, currentCard) {
   previousCard.status = "match";
+  $(previousCard.dom).toggleClass("open match squash-card");
+  $(currentCard.dom).toggleClass("open match squash-card");
 
   setTimeout(function() {
-    $(previousCard.dom).toggleClass("open match");
-    $(currentCard.dom).toggleClass("open match");
+    $(previousCard.dom).toggleClass("squash-card");
+    $(currentCard.dom).toggleClass("squash-card");
     previousCard.dom = null;
   }, 500);
 }

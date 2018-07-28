@@ -122,6 +122,47 @@ a:hover {
 }
 
 /*
+ * Styles for card animation
+ */
+
+.shake-card {
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(3deg);
+  }
+  20% {
+    transform: translate(-1px, -1px) rotate(-3deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(3deg);
+  }
+  60% {
+    transform: translate(-1px, -1px) rotate(-3deg);
+  }
+  80% {
+    transform: translate(1px, 1px) rotate(3deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+.squash-card {
+  animation: squash 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes squash {
+  100% {
+    transform: scale(1.1, 0.9);
+  }
+}
+
+/*
  * Styles for the Score Panel
  */
 
