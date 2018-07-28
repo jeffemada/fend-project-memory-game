@@ -1,21 +1,3 @@
-/* html {
-  box-sizing: border-box;
-} */
-
-/* *,
-*::before,
-*::after {
-  box-sizing: inherit;
-} */
-
-/* html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-} */
-
 body {
   font-family: "Coda", cursive;
   color: #2e3d49;
@@ -29,38 +11,11 @@ a:hover {
   color: #2e3d49;
 }
 
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-} */
-
-/* h1 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
-} */
-
-/* img {
-  width: 100%;
-  height: auto;
-} */
-
 /*
  * Styles for the deck of cards
  */
 
-/*  .background {
-  background-image: url("../img/background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  opacity: 0.9
- } */
-
 .deck {
-  /* width: 660px;
-  min-height: 680px; */
   background: linear-gradient(160deg, #365ecc 0%, #cf3f3f 100%);
   padding: 5px 0 5px 0;
   border-radius: 10px;
@@ -68,16 +23,12 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* align-items: center; */
-  /* margin: 0 0 3em; */
 }
 
 .deck .card {
   height: 120px;
   width: 100px;
   background: #2e3d49;
-  /* font-size: 0;
-  color: #fff; */
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -105,14 +56,12 @@ a:hover {
 .deck .card.match {
   cursor: default;
   background: #02ccba;
-  /* font-size: 33px; */
   pointer-events: none;
 }
 
 .deck .card.not-match {
   cursor: default;
   background: #cc0256;
-  /* font-size: 33px; */
   pointer-events: none;
 }
 
@@ -169,9 +118,6 @@ a:hover {
 .score-panel {
   font-family: 'Roboto Mono', monospace;
   font-size: 20px;
-  /* text-align: left;
-  width: 345px;
-  margin-bottom: 10px; */
 }
 
 .score-panel .stars {
@@ -194,20 +140,15 @@ a:hover {
   color: #fdf5c5;
 }
 
-/* .score-panel .restart {
-  float: right;
-  cursor: pointer;
-} */
-
 .score-panel .moves,
 .time {
   text-align: right;
   display: inline-block;
 }
 
-/* #congratulationModal {
-  color: #2e3d49;
-} */
+/*
+ * Styles for the footer
+ */
 
 .footer-text {
   font-size: 12px;
