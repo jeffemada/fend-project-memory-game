@@ -96,10 +96,10 @@ const difficulty = { easy: 16, hard: 36 };
 let turnedCards = [];
 
 // Object that represents score panel.
-const scorePanel = { moveCounter: 0, startTime: 0, intervalManager: null, playTime: 0 , starCounter: 0};
+const scorePanel = { moveCounter: 0, startTime: 0, intervalManager: null, playTime: 0, starCounter: 0 };
 
 // Object that represents deck configuration.
-const deckConfig = {numberOfcards: difficulty.hard};
+const deckConfig = { numberOfcards: difficulty.hard };
 
 /*
  * Exception object.
@@ -115,7 +115,7 @@ function selectRandomCards(numberOfCards) {
   const randomCards = [];
   let card;
 
-  if ( !numberOfCards || (numberOfCards !== difficulty.easy && numberOfCards !== difficulty.hard)) {
+  if (!numberOfCards || (numberOfCards !== difficulty.easy && numberOfCards !== difficulty.hard)) {
     throw Exception(`Number of cards needs to be ${difficulty.easy} or ${difficulty.hard}.`);
   }
 
@@ -153,14 +153,16 @@ function displayCards(numberOfCards) {
     const domDeck = $(".deck");
     const deckCards = shuffleCards(selectRandomCards(numberOfCards));
     let domCard;
+    let template;
 
     domDeck.find(".card").remove();
 
     for (const card of deckCards) {
-      domCard = $(`
-      <li class="card">
-        <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${card.image}" alt="">
-      </li>`);
+      template = `
+        <li class="card">
+          <img class="img-fluid" src="https://cdn.statsroyale.com/images/cards/full/${card.image}" alt="">
+        </li>`;
+      domCard = $(template);
       domCard.on("click", card.id, selectedCard);
       domDeck.append(domCard);
     }
@@ -227,7 +229,7 @@ function untapCards(previousCard, currentCard) {
   $(previousCard.dom).toggleClass("not-match shake-card");
   $(currentCard.dom).toggleClass("not-match shake-card");
 
-  setTimeout(function() {
+  setTimeout(function () {
     $(previousCard.dom).toggleClass("open not-match shake-card");
     $(currentCard.dom).toggleClass("open not-match shake-card");
   }, 500);
@@ -241,7 +243,7 @@ function matchCards(previousCard, currentCard) {
   $(previousCard.dom).toggleClass("open match squash-card");
   $(currentCard.dom).toggleClass("open match squash-card");
 
-  setTimeout(function() {
+  setTimeout(function () {
     $(previousCard.dom).toggleClass("squash-card");
     $(currentCard.dom).toggleClass("squash-card");
     previousCard.dom = null;
@@ -286,17 +288,19 @@ function updateStarRating() {
  * Show congratulation modal with user score.
  */
 function showCongratulationModal() {
-  $("#congratulationScore").text(
-    `with ${scorePanel.moveCounter} moves and ${scorePanel.starCounter} star(s), in ${scorePanel.playTime} seconds.`
-  );
-  $("#congratulationModal").modal({show: true, backdrop: 'static', keyboard: false});
+  let template = `
+    were ${scorePanel.playTime} seconds on a ${deckConfig.numberOfcards === difficulty.easy ? 'easy' : 'hard'} level.
+    with ${scorePanel.moveCounter} moves and ${scorePanel.starCounter} star(s).`;
+
+  $("#congratulationScore").text(template);
+  $("#congratulationModal").modal({ show: true, backdrop: 'static', keyboard: false });
 }
 
 /*
  * Show configuration modal, so user can choose the level of dificulty.
  */
 function showConfig() {
-  $("#configModal").modal({show: true, backdrop: 'static', keyboard: false});
+  $("#configModal").modal({ show: true, backdrop: 'static', keyboard: false });
   clearInterval(scorePanel.intervalManager);
 }
 
