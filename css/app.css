@@ -166,11 +166,13 @@ a:hover {
  * Styles for the Score Panel
  */
 
-/* .score-panel {
-  text-align: left;
+.score-panel {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 20px;
+  /* text-align: left;
   width: 345px;
-  margin-bottom: 10px;
-} */
+  margin-bottom: 10px; */
+}
 
 .score-panel .stars {
   margin: 0;
@@ -201,7 +203,6 @@ a:hover {
 .time {
   text-align: right;
   display: inline-block;
-  width: 30px;
 }
 
 /* #congratulationModal {

@@ -99,7 +99,7 @@ let turnedCards = [];
 const scorePanel = { moveCounter: 0, startTime: 0, intervalManager: null, playTime: 0 , starCounter: 0};
 
 // Object that represents deck configuration.
-const deckConfig = {numberOfcards: difficulty.easy};
+const deckConfig = {numberOfcards: difficulty.hard};
 
 /*
  * Exception object.
@@ -253,7 +253,8 @@ function matchCards(previousCard, currentCard) {
  * Increments the movement counter on each move.
  */
 function incrementMoveCounter() {
-  $(".moves").text(++scorePanel.moveCounter);
+  ++scorePanel.moveCounter;
+  $(".moves").text(scorePanel.moveCounter.toString().padStart(3, "0").concat(" moves"));
 }
 
 /*
@@ -261,7 +262,7 @@ function incrementMoveCounter() {
  */
 function updateTime() {
   scorePanel.playTime = Math.trunc((performance.now() - scorePanel.startTime) / 1000);
-  $(".time").text(scorePanel.playTime);
+  $(".time").text(scorePanel.playTime.toString().padStart(3, "0").concat(" seconds"));
 }
 
 /*
