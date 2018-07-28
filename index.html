@@ -56,12 +56,12 @@
         </div>
     
         <!-- Modal congratulation -->
-        <div class="modal fade" id="congratulationModal" tabindex="-1" role="dialog" aria-labelledby="Congratulations modal" aria-hidden="true">
+        <div class="modal fade" id="congratulationModal" tabindex="-1" role="dialog" aria-labelledby="congratulationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <img class="img-fluid" src="img/clashRoyaleCool.png" alt="Clash Royale cool emoji">
-                        <h5 class="modal-title">Congratulations! You Won!</h5>
+                        <h5 class="modal-title" id="congratulationModalLabel">Congratulations! You Won!</h5>
                         <p id="congratulationScore"></p>
                     </div>
                     <div class="modal-footer">
@@ -73,10 +73,11 @@
         </div>
     
         <!-- Modal configuration -->
-        <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="Configuration modal" aria-hidden="true">
+        <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="configModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
+                        <h5 class="modal-title" id="configModalLabel">Configuration</h5>
                         <form id="frmConfig">
                             <span>Dificulty: </span>
                             <input type="radio" name="dificulty" value="16" checked> Easy
