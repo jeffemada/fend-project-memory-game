@@ -289,7 +289,7 @@ function updateStarRating() {
  */
 function showCongratulationModal() {
   let template = `
-    were ${scorePanel.playTime} seconds on a ${deckConfig.numberOfcards === difficulty.easy ? 'easy' : 'hard'} level.
+    were ${scorePanel.playTime} seconds on a ${deckConfig.numberOfcards === difficulty.easy ? 'easy' : 'hard'} level, 
     with ${scorePanel.moveCounter} moves and ${scorePanel.starCounter} star(s).`;
 
   $("#congratulationScore").text(template);
