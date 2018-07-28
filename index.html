@@ -43,7 +43,7 @@
                 <span class="time">000 seconds</span>
             </div>
             <div class="col-3 text-right">
-                <a href="#" onclick="startGame()">
+                <a href="#" onclick="showConfig()" data-toggle="tooltip" title="Restart">
                     <i class="fa fa-repeat"></i>
                 </a>
             </div>
@@ -55,7 +55,7 @@
             </div>
         </div>
     
-        <!-- Modal -->
+        <!-- Modal congratulation -->
         <div class="modal fade" id="congratulationModal" tabindex="-1" role="dialog" aria-labelledby="Congratulations modal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">                
@@ -67,6 +67,24 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onclick="startGame()">Play again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal configuration -->
+        <div class="modal fade" id="configModal" tabindex="-1" role="dialog" aria-labelledby="Configuration modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form id="frmConfig">
+                            <span>Dificulty: </span>
+                            <input type="radio" name="dificulty" value="16" checked> Easy
+                            <input type="radio" name="dificulty" value="36"> Hard
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="setConfig()">Start</button>
                     </div>
                 </div>
             </div>

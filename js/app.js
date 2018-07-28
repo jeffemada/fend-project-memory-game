@@ -166,7 +166,6 @@ function displayCards(numberOfCards) {
     }
   } catch (e) {
     console.error(e.message);
-    //TODO show error popup to the user
   }
 }
 
@@ -290,7 +289,24 @@ function showCongratulationModal() {
   $("#congratulationScore").text(
     `with ${scorePanel.moveCounter} moves and ${scorePanel.starCounter} star(s), in ${scorePanel.playTime} seconds.`
   );
-  $("#congratulationModal").modal("show");
+  $("#congratulationModal").modal({show: true, backdrop: 'static', keyboard: false});
+}
+
+/*
+ * Show configuration modal, so user can choose the level of dificulty.
+ */
+function showConfig() {
+  $("#configModal").modal({show: true, backdrop: 'static', keyboard: false});
+  clearInterval(scorePanel.intervalManager);
+}
+
+/*
+ * Change the configuration based on user choose.
+ */
+function setConfig() {
+  $("#configModal").modal("hide");
+  deckConfig.numberOfcards = parseInt($("#frmConfig").find("input[name='dificulty']:checked").val());
+  startGame();
 }
 
 /*
@@ -311,7 +327,7 @@ function startGame() {
   $("#congratulationModal").modal("hide");
   incrementMoveCounter();
   updateStarRating();
-  displayCards(deckConfig.numberOfcards); //TODO let user choose
+  displayCards(deckConfig.numberOfcards);
 
   // time control
   scorePanel.startTime = performance.now();
@@ -319,4 +335,4 @@ function startGame() {
 }
 
 // To start a game when the page is loaded
-$(startGame);
+$(showConfig);
