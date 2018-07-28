@@ -3,18 +3,23 @@
 ## Table of Contents
 
 * [Instructions](#instructions)
+* [Installation](#installation)
 * [Contributing](#contributing)
 
 ## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+Memory Game is forked from [Udacity fend-project-memory-game](https://github.com/udacity/fend-project-memory-game). It is a     project made during the Web Front-End Foundations course.
+It's a cool game made with the famous [Clash Royale](https://clashroyale.com/) cards.
 
-To get started, open `js/app.js` and start building out the app's functionality
+## Installation
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+Clone the GitHub repository and open the `index.html` on your browser.
+
+```
+$ git clone https://github.com/jeffemada/fend-project-memory-game
+$ cd fend-project-memory-game
+```
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+If you are interested in made some improvements on the source code, send me a pull request.
